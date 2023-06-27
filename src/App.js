@@ -7,8 +7,12 @@ function App() {
   const [resourceType, setResourceType] = useState('posts');
   console.log('render');// console.log('reder') will be printed whenever the function App is rendered.
 
+  const [items, setItems] = useState([])
+
   useEffect(()=>{
-    console.log('resourcetype changed')
+  fetch('https://jsonplaceholder.typicode.com/${resourceType')
+    .then((response) => response.json())
+    .then((json) => setItems(json));
   }, [resourceType]) // useEffect works whenever [resourceType] is changed
 
 
@@ -20,6 +24,9 @@ function App() {
         <button onClick={() => setResourceType("comments")}> Comments</button>
       </div>
       <h1>{resourceType}</h1>
+      {items.map( item => {
+        return <pre> {JSON.stringify(item)</pre>
+      })}
     </>
   );
   
